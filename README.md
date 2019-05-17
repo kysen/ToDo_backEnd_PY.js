@@ -1,2 +1,0 @@
-# ListaDeQueHacer
-Created with CodeSandbox
