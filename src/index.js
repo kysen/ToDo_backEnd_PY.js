@@ -61,7 +61,7 @@ class App extends React.Component {
   };
 
   deleteItem = id => {
-    fetch(`https://todo-list-api-python-kmj.herokuapp.com/${id}`, {
+    fetch(`https://todo-list-api-python-kmj.herokuapp.com/todo/${id}`, {
       method: "DELETE"
     })
       .then(
