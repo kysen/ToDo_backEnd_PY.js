@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./styles.css";
+import "./styles/styles.css";
 import TodoItem from "./todoItem";
+import Axios from "axios";
 
 class App extends React.Component {
   constructor() {
@@ -14,6 +15,16 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    fetch("http://localhost:5000/todos")
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          todos: data
+        })
+      );
+  }
+
   onChange = event => {
     this.setState({
       todo: event.target.value
@@ -22,16 +33,45 @@ class App extends React.Component {
 
   renderTodos = () => {
     return this.state.todos.map(item => {
-      return <TodoItem title={item} />;
+      return (
+        <TodoItem key={item.id} item={item} deleteItem={this.deleteItem} />
+      );
     });
   };
 
   addTodo = event => {
     event.preventDefault();
-    this.setState({
-      todos: [...this.state.todos, this.state.todo],
-      todo: ""
-    });
+
+    Axios({
+      method: "post",
+      url: "http://localhost:5000/add-todo",
+      headers: { "content-type": "application/json" },
+      data: {
+        title: this.state.todo,
+        done: false
+      }
+    })
+      .then(data => {
+        this.setState({
+          todos: [...this.state.todos, data.data],
+          todo: ""
+        });
+      })
+      .catch(error => console.log(error));
+  };
+
+  deleteItem = id => {
+    fetch(`http://localhost:5000/todo/${id}`, {
+      method: "DELETE"
+    })
+      .then(
+        this.setState({
+          todos: this.state.todos.filter(item => {
+            return item.id !== id;
+          })
+        })
+      )
+      .catch(error => console.log(error));
   };
 
   render() {
@@ -41,12 +81,11 @@ class App extends React.Component {
         <form className="add-todo">
           <input
             type="text"
-            placeholder="  Add To-Do"
+            placeholder="Add To-Do"
             onChange={this.onChange}
             value={this.state.todo}
           />
           <button onClick={this.addTodo}>Add</button>
-          {/* <button onClick={this.clear}>Clear</button> */}
         </form>
         {this.renderTodos()}
       </div>
@@ -56,11 +95,3 @@ class App extends React.Component {
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
-
-// for (let i = 0; i in this.todos; i++) {
-//   if (this.todos[i] === "done") {
-//     this.setState({
-//       todos: null
-//     });
-//   }
-// }

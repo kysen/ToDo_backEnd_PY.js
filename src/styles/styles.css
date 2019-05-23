@@ -1,0 +1,68 @@
+#root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #00cb78;
+  font-family: sans-serif;
+}
+
+.app {
+  margin-top: 2rem;
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  background-color: #454544;
+  border-radius: 10px;
+  width: 400px;
+  -webkit-box-shadow: 5px 5px 5px #999;
+          box-shadow: 5px 5px 5px #999;
+}
+
+.app .add-todo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 60%;
+  padding-bottom: 15px;
+}
+
+.app .add-todo input {
+  padding-left: 8px;
+}
+
+.app .add-todo button {
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+
+.todo-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 80%;
+}
+
+.todo-item .done {
+  color: black;
+  text-decoration: line-through;
+}
+
+.todo-item button {
+  border-radius: 10px;
+  outline: none;
+  border: none;
+}
+/*# sourceMappingURL=styles.css.map */
