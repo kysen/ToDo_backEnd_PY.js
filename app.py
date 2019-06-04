@@ -6,8 +6,6 @@ from flask_marshmallow import Marshmallow
 from flask_heroku import Heroku
 import os
 
-# test
-
 app = Flask(__name__)
 heroku = Heroku(app)
 
